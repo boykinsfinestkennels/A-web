@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Puppy Application - Boykin's Finest Kennels</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&amp;family=Open+Sans&amp;display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Open Sans', Arial, sans-serif; background: #000; color: #FFFDD0; width: 100vw; overflow-x: hidden; }
+        
+        /* Header Styles */
+        header { padding: 15px 20px; background: #1C1C1C; text-align: center; width: 100vw; position: sticky; top: 0; z-index: 1000; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: 'Montserrat', Arial, sans-serif; font-size: 22px; color: #FFF; cursor: pointer; }
+        .home-button { background: #DAA520; color: #FFF; padding: 12px 25px; text-decoration: none; border-radius: 5px; font-family: 'Montserrat', Arial, sans-serif; font-size: 16px; cursor: pointer; border: none; }
+        .home-button:hover { background: #E6B800; }
+
+        /* Hero Section Styles */
+        .hero { position: relative; width: 100vw; max-width: 100%; height: 100vh; background: #333; overflow: hidden; }
+        .hero-image { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
+        .hero-image img { width: 100%; height: 100%; object-fit: cover; object-position: center; border-radius: 0; }
+        .hero-content { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; z-index: 2; width: 100%; }
+
+        /* Application Overlay Styles */
+        .application-overlay { background: rgba(28, 28, 28, 0.85); padding: 20px; border-radius: 10px; max-width: 600px; width: 90%; z-index: 3; margin: 0 auto; }
+        form input, form textarea { width: 100%; padding: 10px; margin: 10px 0; border: none; border-radius: 5px; background: #333; color: #FFFDD0; }
+        .cta-button { background: #DAA520; color: #FFF; padding: 12px 25px; text-decoration: none; border-radius: 5px; font-family: 'Montserrat', Arial, sans-serif; font-size: 16px; margin: 5px; display: inline-block; cursor: pointer; border: none; }
+        .cta-button:hover { background: #E6B800; }
+        .checkbox-container { text-align: center; margin: 10px 0; }
+        a { color: #FFFDD0; text-decoration: none; }
+        a:hover { color: #DAA520; }
+
+        /* Editable Elements */
+        
+        
+        /* Admin Tools and Popup */
+        
+        
+        
+        
+        
+        
+
+        /* Prompt Styles */
+        
+
+        @media (max-width: 768px) {
+            .hero { height: 80vh; }
+            .application-overlay { width: 95%; }
+            .logo { font-size: 18px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">Boykin's Finest Kennels</div>
+        <a href="https://boykinsfinestkennels.github.io/HOMEPAGE/" class="home-button" data-key="home-link">Home</a>
+    </header>
+
+    <!-- Hero Section with Overlay -->
+    <div class="hero">
+        <div class="hero-image">
+            <img src="media/background/4.jpg" alt="Hero Image" class="editable-image" style="">
+        </div>
+        <div class="hero-content">
+            <div class="application-overlay">
+                <form id="puppy-application-form" onsubmit="event.preventDefault(); submitApplication();">
+                    <input type="text" id="fullName" placeholder="Full Name" required="" class="editable-text" style="">
+                    <input type="email" id="email" placeholder="Email" required="" class="editable-text" style="">
+                    <input type="text" id="cityState" placeholder="City and State" required="" class="editable-text" style="">
+                    <input type="text" id="puppyName" placeholder="Puppy Name (optional)" class="editable-text" style="">
+                    <input type="text" id="genderPreference" placeholder="Do you prefer a male or female puppy?" required="" class="editable-text" style="">
+                    <textarea id="livingConditions" placeholder="Describe the living conditions for the puppy (e.g., indoors, outdoors, daycare)" required="" class="editable-text" style=""></textarea>
+                    <textarea id="message" placeholder="Additional Message (optional)" class="editable-text" style=""></textarea>
+                    <label style="display: block; margin: 10px 0;">
+                        <input type="checkbox" id="termsAgree" required=""> I agree to the <a href="#terms" target="_blank">Terms &amp; Conditions</a>
+                    </label>
+                    <div class="checkbox-container">
+                        <label>
+                            <input type="checkbox" id="notRobot" required=""> I'm not a robot
+                        </label>
+                    </div>
+                    <button type="submit" class="cta-button">Submit Application</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Tools -->
+    
+
+    <!-- Admin Popup -->
+    
+
+    <!-- Link Popup -->
+    
+
+    <!-- Prompt -->
+    
+
+    <script>
+                    function submitApplication() {
+                        const form = document.getElementById('puppy-application-form');
+                        const fullName = document.getElementById('fullName').value;
+                        const email = document.getElementById('email').value;
+                        const cityState = document.getElementById('cityState').value;
+                        const puppyName = document.getElementById('puppyName').value || "Not specified";
+                        const genderPreference = document.getElementById('genderPreference').value;
+                        const livingConditions = document.getElementById('livingConditions').value;
+                        const message = document.getElementById('message').value;
+                        const termsAgree = document.getElementById('termsAgree').checked;
+                        const notRobot = document.getElementById('notRobot').checked;
+                        const customFields = Array.from(form.querySelectorAll('input[type="text"], textarea')).filter(el => !['fullName', 'email', 'cityState', 'puppyName', 'genderPreference', 'livingConditions', 'message'].includes(el.id)).map(el => el.placeholder + ': ' + el.value).join('\n');
+
+                        if (!fullName || !email || !cityState || !genderPreference || !livingConditions) {
+                            alert('Please fill out all required fields.');
+                            return;
+                        }
+                        if (!termsAgree) {
+                            alert('You must agree to the Terms & Conditions to submit your application.');
+                            return;
+                        }
+                        if (!notRobot) {
+                            alert('Please confirm you are not a robot.');
+                            return;
+                        }
+
+                        const termsText = "Terms & Conditions placeholder - refer to full website for details.";
+                        const subject = encodeURIComponent('Puppy Application' + (puppyName !== 'Not specified' ? ' for ' + puppyName : ''));
+                        const bodyToSeller = encodeURIComponent('Full Name: ' + fullName + '\nEmail: ' + email + '\nCity and State: ' + cityState + '\nPuppy Name: ' + puppyName + '\nGender Preference: ' + genderPreference + '\nLiving Conditions: ' + livingConditions + '\nAdditional Message: ' + message + '\n' + customFields + '\nNot a Robot: Confirmed');
+                        const bodyToApplicant = encodeURIComponent('Dear ' + fullName + ',\n\nThank you for your application' + (puppyName !== 'Not specified' ? ' for ' + puppyName : '') + '. Below is a copy of our Terms & Conditions for your records:\n\n' + termsText + '\n\nBest regards,\nBoykin\'s Finest Kennels');
+
+                        window.location.href = 'mailto:boykinsfinestkennels@gmail.com?subject=' + subject + '&body=' + bodyToSeller;
+                        setTimeout(() => {
+                            window.location.href = 'mailto:' + email + '?subject=' + encodeURIComponent('Your Application to Boykin’s Finest Kennels') + '&body=' + bodyToApplicant;
+                        }, 500);
+                        form.reset();
+                    }
+                </script>
+
+</body></html>
